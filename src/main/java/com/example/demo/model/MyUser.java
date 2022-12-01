@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.model;
 
 import java.util.Collection;
 import java.util.function.Function;
@@ -7,8 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class MyUser implements UserDetails {
+import lombok.Data;
 
+@Data
+public class MyUser implements UserDetails {
+	private int userid;
 	private String username;
 	private String password;
 	private boolean accountNonExpired;
@@ -27,6 +30,7 @@ public class MyUser implements UserDetails {
 	    public MyUser(User user) {
 	    	this.username=user.getUsername();
 	    	this.password=user.getPassword();
+	    	this.userid=user.getUserid();
 	    	
 	    	this.accountNonExpired=user.isAccountNonExpired();
 	    	this.accountNonLocked=user.isAccountNonLocked();
@@ -35,6 +39,13 @@ public class MyUser implements UserDetails {
 	    	this.mobileNo=user.getMobileNo();
 	    	this.email=user.getEmail();
 	    	this.roles=user.getRoles();
+	    	
+	    	
+	 
+	    	
+	    	
+	    	
+	    	
 	    	this.authorities=user.getAuthorities().stream().map(new Function<String,GrantedAuthority>(){
 
 				@Override
@@ -99,5 +110,7 @@ public class MyUser implements UserDetails {
 		// TODO Auto-generated method stub
 		return this.enabled;
 	}
+	
+	
 
 }
